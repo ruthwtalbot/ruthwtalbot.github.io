@@ -1,1 +1,0 @@
-# ruthwtalbot.github.io
