@@ -1,6 +1,107 @@
 h1.name {
   font-size: 40px;
-  text-align: center;
   font-weight: bold;
   text-transform: uppercase;
+  color: #666;
+  margin: 20px 0 10px 0;
+}
+
+header{
+  width: 100%;
+  border-bottom: 2px solid #eee;
+}
+
+div.content {
+  max-width: 810px;
+  line-height: 1.7em;
+  margin: auto;
+  font-family: "Lato", verdana, sans-serif;
+  color: #555;
+}
+
+.half {
+  width: 50%;
+  display: inline-block;
+  float: left;
+}
+
+.half.column {
+  margin-top: 20px;
+}
+
+a.external-link {
+  border-bottom: 1px dashed #ccc;
+  text-decoration: none;
+  color: black;
+  font-weight: 400;
+}
+
+p {
+  margin-top: 0;
+}
+
+/*.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}*/
+
+img {
+  width: 100%;
+  cursor: pointer;
+  border-radius: 4px;
+  mix-blend-mode: multiply;
+}
+
+a:hover {
+  opacity: 1;
+  z-index: 1;
+}
+
+a:hover img,
+a.text img {
+  -webkit-filter: blur(5px);
+  filter: blur(5px);
+}
+
+.img {
+  position: relative;
+  padding: 5px;
+}
+
+.img-wrap {
+  border-radius: 5px;
+  background-color: #f8f8f8;
+  mix-blend-mode: multiply;
+  text-align: center;
+}
+
+a:hover .img-wrap,
+a.text .img-wrap {
+  background-color: #555;
+}
+
+
+.promo-text {
+  font-size: 0.9em;
+  font-weight: bold;
+  margin: 0 auto 1em;
+  color: white;
+  padding: 5px 0;
+  display: none;
+  position: absolute;
+  top: 20%;
+  text-transform: uppercase;
+}
+
+a:hover .promo-text,
+a.text .promo-text {
+  display: block;
+}
+
+/* Mobile styles */
+@media screen and (max-width: 650px) {
+  .column.half {
+    width: 100%;
+  }
 }
