@@ -1,0 +1,39 @@
+label {
+  font-weight: 600;
+  text-transform: capitalize;
+}
+input[type="radio"] {
+  margin: 5px;
+}
+
+#charts div {
+  font: 13px sans-serif;
+  background-color: steelblue;
+  text-align: right;
+  font-weight: bold;
+  padding: 3px;
+  margin: 1px;
+  color: white;
+}
+
+.column {
+  display: inline-block;
+  float: left;
+  padding: 10px;
+}
+
+
+h2 {
+  margin-top: 0;
+}
+
+
+text {
+  fill: #fff;
+  font-size: 11px;
+  line-height: 15px;
+}
+
+text.percent {
+  font-size: 9px;
+}
