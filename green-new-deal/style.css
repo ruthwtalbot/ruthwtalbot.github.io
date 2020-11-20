@@ -6,6 +6,10 @@ input[type="radio"] {
   margin: 5px;
 }
 
+#charts {
+  position: relative;
+}
+
 #charts div {
   font: 13px sans-serif;
   background-color: steelblue;
@@ -22,11 +26,9 @@ input[type="radio"] {
   padding: 10px;
 }
 
-
 h2 {
   margin-top: 0;
 }
-
 
 text {
   fill: #fff;
@@ -38,12 +40,28 @@ text.percent {
   font-size: 11px;
 }
 
-
-h1, h2 {
+h1,
+h2 {
   text-transform: uppercase;
   color: #777;
 }
 
 body {
   font-family: "Lato", verdana, sans-serif;
+}
+
+.tick text {
+  fill: #666;
+}
+
+ul {
+  position: absolute;
+  font-size: 10px;
+  list-style-type: none;
+  position: absolute;
+  text-align: right;
+  line-height: 1.1;
+  color: #666;
+  display: table;
+  padding-inline-start: 0px;
 }
