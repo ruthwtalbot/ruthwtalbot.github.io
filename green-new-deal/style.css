@@ -30,10 +30,20 @@ h2 {
 
 text {
   fill: #fff;
-  font-size: 11px;
+  font-size: 9px;
   line-height: 15px;
 }
 
 text.percent {
-  font-size: 9px;
+  font-size: 11px;
+}
+
+
+h1, h2 {
+  text-transform: uppercase;
+  color: #777;
+}
+
+body {
+  font-family: "Lato", verdana, sans-serif;
 }

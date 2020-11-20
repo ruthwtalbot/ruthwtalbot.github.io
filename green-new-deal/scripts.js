@@ -1,5 +1,6 @@
-var g;
 var mapData;
+var container = "#container";
+var colorScale = d3.scaleLinear().domain([0, 1]).range(["#ff0000", "#0000ff"]);
 
 var categories = [
   "overall",
@@ -35,28 +36,52 @@ var categories = [
 
   d3.csv("Overall_GND_Support.csv").then(function (data) {
     mapData = data;
-    let scraped = Object.entries(data[50]).slice(1);
+    let scraped = Object.entries(data[49]).slice(1);
     scraped = scraped.sort((a, b) => {
       return b[1] * 1 - a[1] * 1;
     });
 
-    // Add bar chart of average support per measure.
-    var chart = d3.select("#charts").append("chart");
-    chart
-      .selectAll("div")
+    scraped = scraped.map(function(s) {
+      return {name: s[0], val: [s[1] * 1]};
+    })
+
+    var element = document.querySelector(container);
+    var width = element.offsetWidth * 0.33;
+    var xScale = d3.scaleLinear().domain([0, 1]).range([0, width]);
+
+    var xAxis = d3
+      .axisBottom()
+      .scale(xScale)
+      .ticks(4)
+      .tickFormat(function (d) {
+        return d;
+      });
+
+    var chart = d3.select("#charts").append("svg").attr("width", width).attr("height", 500).append("g");
+
+    // Render bars to chart.
+    var group = chart
+      .selectAll(".group")
       .data(scraped)
       .enter()
-      .append("div")
-      .style("width", function (d) {
-        return parseFloat(d[1]) * 200 + "px";
-      })
-      .style("height", "20px")
-      .style("display", function (d) {
-        return isNaN(parseFloat(d[1])) ? "none" : "";
-      })
-      .text(function (d) {
-        return d[0] + " (" + d[1] + ")";
-      });
+      .append("g")
+      .attr("transform", (d, i) => "translate(0," + i * (20 + 2) + ")");
+    chart
+      .append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0, 400)")
+      .call(xAxis);
+
+    // Add bar chart of average support per measure.
+    group
+      .selectAll("rect")
+      .data(d => d.val)
+      .enter()
+      .append("rect")
+      .attr("x", d => 0)
+      .attr("width", function(d) { return xScale(d * 1)})
+      .attr("height", 20)
+      .attr("fill", d => colorScale(d * 1));
 
     update(mapData, "overall");
   });
@@ -68,7 +93,7 @@ var categories = [
  */
 function onSelect() {
   // Display correct data for the radio button checked.
-  var sel = document.getElementById('dropdown');
+  var sel = document.getElementById("dropdown");
   update(mapData, sel.options[sel.selectedIndex].value);
 }
 
@@ -80,9 +105,8 @@ function update(data, property) {
   var containerElement = d3.select("#container");
   var chartElement = containerElement.select("svg");
 
-  var container = "#container";
   var element = document.querySelector(container);
-  var width = element.offsetWidth * 0.7;
+  var width = element.offsetWidth * 0.66;
 
   // resize map (needs to be explicitly set for IE11)
   chartElement.attr("width", width).attr("height", function () {
@@ -91,16 +115,10 @@ function update(data, property) {
     return Math.floor((width * parseInt(viewBox[3])) / parseInt(viewBox[2]));
   });
 
-  var colorScale = d3
-    .scaleLinear()
-    .domain([0, 1])
-    .range(["#ff0000", "#0000ff"]);
-
   // Set state colors
   data.forEach(function (state) {
     if (state[property] !== null) {
       var name = state.state_name.split(" ").join("-");
-      console.log(name, chartElement);
       chartElement
         .select(".state-" + name)
         .attr("class", "state-" + name)
@@ -113,7 +131,6 @@ function update(data, property) {
           }
           return color;
         });
-      // .attr("fill", colorScale(state[valueColumn]));
     }
   });
 
@@ -129,17 +146,17 @@ function updateText(data, property, element) {
     .enter()
     .append("text")
     .attr("text-anchor", "middle")
-    .text(function(d) {
+    .text(function (d) {
       return d.state_abbrv;
     })
-    .attr("x", function(d) {
+    .attr("x", function (d) {
       var className = `state-${classify(d.state_name)}`;
 
       var tileBox = document.getElementsByClassName(className)[0].getBBox();
 
       return tileBox.x + tileBox.width * 0.52;
     })
-    .attr("y", function(d) {
+    .attr("y", function (d) {
       var className = "state-" + classify(d.state_name);
 
       var tileBox = document.getElementsByClassName(className)[0].getBBox();
@@ -149,27 +166,31 @@ function updateText(data, property, element) {
       return tileBox.y + tileBox.height * 0.35 + textOffset;
     });
 
-    element.selectAll('text').data(data.filter(d => d.state_name)).exit().remove();
+  element
+    .selectAll("text")
+    .data(data.filter(d => d.state_name))
+    .exit()
+    .remove();
 
-    element
+  element
     .append("g")
     .selectAll("text")
     .data(data.filter(d => d.state_name))
     .enter()
     .append("text")
     .attr("text-anchor", "middle")
-    .text(function(d) {
-      return parseInt(d[property] * 100) + '%';
+    .text(function (d) {
+      return parseInt(d[property] * 100) + "%";
     })
     .attr("class", "percent")
-    .attr("x", function(d) {
+    .attr("x", function (d) {
       var className = `state-${classify(d.state_name)}`;
 
       var tileBox = document.getElementsByClassName(className)[0].getBBox();
 
       return tileBox.x + tileBox.width * 0.52;
     })
-    .attr("y", function(d) {
+    .attr("y", function (d) {
       var className = "state-" + classify(d.state_name);
 
       var tileBox = document.getElementsByClassName(className)[0].getBBox();
@@ -181,5 +202,5 @@ function updateText(data, property, element) {
 }
 
 function classify(name) {
-  return name.split(" ").join("-")
+  return name.split(" ").join("-");
 }
