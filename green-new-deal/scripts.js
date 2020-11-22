@@ -69,7 +69,7 @@ var categories = [
       .attr("height", width * 3)
       .append("g");
 
-    // Render bars to chart.
+    // Add bars to chart.
     var group = chart
       .selectAll(".group")
       .data(scraped)
