@@ -5,7 +5,7 @@ var colorScale = d3.scaleLinear().domain([0, 1]).range(["#ff0000", "#0000ff"]);
 var categories = [
   "Overall reported support",
   "Avg support across subcategories",
-  "Democratic vote %",
+  "Democratic vote 2016",
   "Clean Air and Water",
   "A carbon price",
   "Job guarantee",
