@@ -36,109 +36,8 @@ var categories = [
 
   d3.csv("Overall_GND_Support.csv").then(function (data) {
     mapData = data;
-    let scraped = Object.entries(data[49]).slice(1);
-    scraped = scraped
-      .sort((a, b) => {
-        return b[1] * 1 - a[1] * 1;
-      })
-      .filter(s => s[0] != "state_abbrv");
 
-    scraped = scraped.map(function (s) {
-      return { name: s[0], val: [s[1] * 1] };
-    });
-
-    var element = document.querySelector(container);
-    var width = element.offsetWidth * 0.3;
-    var xScale = d3
-      .scaleLinear()
-      .domain([0, 1])
-      .range([0, width - 105]);
-
-    var xAxis = d3
-      .axisBottom()
-      .scale(xScale)
-      .ticks(4)
-      .tickFormat(function (d) {
-        if (d != 0) return d * 100;
-      });
-
-    var chart = d3
-      .select("#charts")
-      .append("svg")
-      .attr("width", width + 10)
-      .attr("height", width * 3)
-      .append("g");
-
-    // Add bars to chart.
-    var group = chart
-      .selectAll(".group")
-      .data(scraped)
-      .enter()
-      .append("g")
-      .attr("transform", (d, i) => "translate(0," + i * (25 + 3) + ")");
-    chart
-      .append("g")
-      .attr("class", "x axis")
-      .attr("transform", `translate(105, ${(scraped.length) * (25 + 3)})`)
-      .call(xAxis);
-
-    // Add bar chart of average support per measure.
-    group
-      .selectAll("rect")
-      .data(d => d.val)
-      .enter()
-      .append("rect")
-      .attr("x", d => 105)
-      .attr("width", function (d) {
-        return xScale(d * 1);
-      })
-      .attr("height", 25)
-      .attr("fill", d => colorScale(d * 1));
-
-    // Render bar values.
-    group
-      .append("g")
-      .attr("class", "value")
-      .selectAll("text")
-      .data(d => d.val)
-      .enter()
-      .append("text")
-      .text(function (d) {
-        return d ? (d * 100).toFixed(0) + "%" : null;
-      })
-      .attr("class", "bar-text")
-      .attr("x", d => xScale(d * 1) + 90)
-      .attr("text-anchor", "end")
-      .attr("dy", 14);
-
-    // Render bar labels.
-    d3.select("#charts")
-      .append("ul")
-      .attr("class", "labels")
-      .attr(
-        "style",
-        formatStyle({
-          width: "80px",
-          top: "45px",
-          left: "0",
-        })
-      )
-      .selectAll("li")
-      .data(scraped)
-      .enter()
-      .append("li")
-      .attr("style", (d, i) =>
-        formatStyle({
-          width: "100px",
-          height: "28px",
-          left: "0px",
-          top: i * 28 + "px;",
-        })
-      )
-      .attr("class", d => classify(d.name))
-      .append("span")
-      .text(d => d.name);
-
+    createCharts(mapData);
     update(mapData, "Overall reported support");
   });
 })();
@@ -150,6 +49,111 @@ function onSelect() {
   // Display correct data for the radio button checked.
   var sel = document.getElementById("dropdown");
   update(mapData, sel.options[sel.selectedIndex].value);
+}
+
+function createCharts(data) {
+  let scraped = Object.entries(data[50]).slice(1);
+  scraped = scraped
+    .sort((a, b) => {
+      return b[1] * 1 - a[1] * 1;
+    })
+    .filter(s => s[0] != "state_abbrv");
+
+  scraped = scraped.map(function (s) {
+    return { name: s[0], val: [s[1] * 1] };
+  });
+
+  var element = document.querySelector(container);
+  var width = element.offsetWidth * 0.3;
+  var xScale = d3
+    .scaleLinear()
+    .domain([0, 1])
+    .range([0, width - 105]);
+
+  var xAxis = d3
+    .axisBottom()
+    .scale(xScale)
+    .ticks(4)
+    .tickFormat(function (d) {
+      if (d != 0) return d * 100;
+    });
+
+  var chart = d3
+    .select("#charts")
+    .append("svg")
+    .attr("width", width + 10)
+    .attr("height", width * 3)
+    .append("g");
+
+  // Add bars to chart.
+  var group = chart
+    .selectAll(".group")
+    .data(scraped)
+    .enter()
+    .append("g")
+    .attr("transform", (d, i) => "translate(0," + i * (25 + 3) + ")");
+  chart
+    .append("g")
+    .attr("class", "x axis")
+    .attr("transform", `translate(105, ${scraped.length * (25 + 3)})`)
+    .call(xAxis);
+
+  // Add bar chart of average support per measure.
+  group
+    .selectAll("rect")
+    .data(d => d.val)
+    .enter()
+    .append("rect")
+    .attr("x", d => 105)
+    .attr("width", function (d) {
+      return xScale(d * 1);
+    })
+    .attr("height", 25)
+    .attr("fill", d => colorScale(d * 1));
+
+  // Render bar values.
+  group
+    .append("g")
+    .attr("class", "value")
+    .selectAll("text")
+    .data(d => d.val)
+    .enter()
+    .append("text")
+    .text(function (d) {
+      return d ? (d * 100).toFixed(0) + "%" : null;
+    })
+    .attr("class", "bar-text")
+    .attr("x", d => xScale(d * 1) + 90)
+    .attr("text-anchor", "end")
+    .attr("dy", 14);
+
+  // Render bar labels.
+  d3.select("#charts")
+    .append("ul")
+    .attr("class", "labels")
+    .attr(
+      "style",
+      formatStyle({
+        width: "80px",
+        top: "45px",
+        left: "0",
+      })
+    )
+    .selectAll("li")
+    .data(scraped)
+    .enter()
+    .append("li")
+    .attr("style", (d, i) =>
+      formatStyle({
+        width: "100px",
+        height: "28px",
+        left: "0px",
+        top: i * 28 + "px;",
+      })
+    )
+    .attr("class", d => classify(d.name))
+    .append("span")
+    .text(d => d.name);
 }
 
 /*
@@ -189,7 +193,7 @@ function update(data, property) {
     }
   });
 
-  updateText(data, property, chartElement);
+  updateText(data.slice(0, -1), property, chartElement);
 }
 
 function updateText(data, property, element) {

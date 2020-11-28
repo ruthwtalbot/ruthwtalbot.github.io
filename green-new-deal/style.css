@@ -65,3 +65,9 @@ ul {
   display: table;
   padding-inline-start: 0px;
 }
+
+.footnote {
+  font-size: 11px;
+  color: #ccc;
+  font-style: italic;
+}

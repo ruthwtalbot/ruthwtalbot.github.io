@@ -11,10 +11,9 @@ header {
   border-bottom: 2px solid #eee;
 }
 
-h3.projects {
+h3 {
   font-size: 20px;
   font-weight: bold;
-  text-transform: uppercase;
   color: #777;
   margin: 20px 0 10px 0;
 }
@@ -33,7 +32,7 @@ div.content {
   float: left;
 }
 
-a.external-link {
+a.link {
   border-bottom: 1px dashed #ccc;
   text-decoration: none;
   color: black;
@@ -74,23 +73,15 @@ a.text img {
   text-align: center;
 }
 
-a:hover .img-wrap,
-a.text .img-wrap {
-  /*background-color: #555;*/
-}
-
 .promo-text {
   font-size: 0.9em;
   font-weight: bold;
-  /*margin: 0 auto 1em;*/
   color: #777;
-  padding: 5px 0;
   display: none;
   position: absolute;
-  /*top: 20%;*/
   line-height: 15px;
   text-transform: uppercase;
-  width: 90%;
+  width: 99%;
 }
 
 .img-wrap.dark .promo-text {
@@ -143,4 +134,15 @@ a.text .promo-text {
     -webkit-column-count: 3;
     column-count: 3;
   }
+}
+
+.header {
+  display: inline-block;
+}
+
+header.title {
+  float: left;
+}
+header.links {
+  float: right;
 }
