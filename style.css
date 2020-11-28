@@ -1,9 +1,13 @@
+body {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 100;
+}
+
 h1.name {
   font-size: 40px;
-  font-weight: bold;
   text-transform: uppercase;
-  color: #777;
   margin: 20px 0 10px 0;
+  font-weight: 300;
 }
 
 header {
@@ -12,18 +16,18 @@ header {
 }
 
 h3 {
-  font-size: 20px;
-  font-weight: bold;
-  color: #777;
+  font-size: 18px;
+  color: #333;
   margin: 20px 0 10px 0;
+  border-bottom: 2px solid #eee;
+  font-weight: 300;
 }
 
 div.content {
   max-width: 600px;
   line-height: 1.7em;
   margin: auto;
-  font-family: "Lato", verdana, sans-serif;
-  color: #555;
+  color: #333;
 }
 
 .column {
@@ -36,11 +40,11 @@ a.link {
   border-bottom: 1px dashed #ccc;
   text-decoration: none;
   color: black;
-  font-weight: 400;
 }
 
 p {
   margin-top: 15px;
+  color: #333;
 }
 
 img {

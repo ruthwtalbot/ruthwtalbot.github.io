@@ -1,3 +1,8 @@
+body {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 100;
+}
+
 label {
   font-weight: 600;
   text-transform: capitalize;
@@ -44,10 +49,6 @@ h1,
 h2 {
   text-transform: uppercase;
   color: #777;
-}
-
-body {
-  font-family: "Lato", verdana, sans-serif;
 }
 
 .tick text {

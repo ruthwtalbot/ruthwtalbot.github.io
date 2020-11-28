@@ -1,8 +1,13 @@
+body {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 100;
+}
+
 h1.name {
   font-size: 40px;
-  font-weight: bold;
+  font-weight: 300;
   text-transform: uppercase;
-  color: #777;
+  color: #666;
   margin: 20px 0 10px 0;
 }
 
@@ -15,7 +20,7 @@ h3.projects {
   font-size: 20px;
   font-weight: bold;
   text-transform: uppercase;
-  color: #777;
+  color: #666;
   margin: 20px 0 10px 0;
 }
 
@@ -23,7 +28,6 @@ div.content {
   max-width: 600px;
   line-height: 1.7em;
   margin: auto;
-  font-family: "Lato", verdana, sans-serif;
   color: #555;
 }
 
@@ -37,7 +41,6 @@ a.external-link {
   border-bottom: 1px dashed #ccc;
   text-decoration: none;
   color: black;
-  font-weight: 400;
 }
 
 p {
