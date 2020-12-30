@@ -121,7 +121,7 @@ a.text .promo-text {
   height: auto !important;
 }
 
-@media screen and (max-width: 550px) {
+@media screen and (max-width: 400px) {
   #work {
     -moz-column-count: 1;
     -webkit-column-count: 1;
