@@ -1,0 +1,74 @@
+body {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 100;
+}
+
+label {
+  font-weight: 600;
+  text-transform: capitalize;
+}
+input[type="radio"] {
+  margin: 5px;
+}
+
+#charts {
+  position: relative;
+}
+
+#charts div {
+  font: 13px sans-serif;
+  background-color: steelblue;
+  text-align: right;
+  font-weight: bold;
+  padding: 3px;
+  margin: 1px;
+  color: white;
+}
+
+.column {
+  display: inline-block;
+  float: left;
+  padding: 10px;
+}
+
+h2 {
+  margin-top: 0;
+}
+
+text {
+  fill: #fff;
+  font-size: 9px;
+  line-height: 15px;
+}
+
+text.percent {
+  font-size: 11px;
+}
+
+h1,
+h2 {
+  text-transform: uppercase;
+  color: #777;
+}
+
+.tick text {
+  fill: #666;
+}
+
+ul {
+  position: absolute;
+  font-size: 10px;
+  list-style-type: none;
+  position: absolute;
+  text-align: right;
+  line-height: 1.1;
+  color: #666;
+  display: table;
+  padding-inline-start: 0px;
+}
+
+.footnote {
+  font-size: 11px;
+  color: #ccc;
+  font-style: italic;
+}

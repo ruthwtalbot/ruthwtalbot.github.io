@@ -5,10 +5,9 @@ body {
 
 h1.name {
   font-size: 40px;
-  font-weight: 300;
   text-transform: uppercase;
-  color: #666;
   margin: 20px 0 10px 0;
+  font-weight: 300;
 }
 
 header {
@@ -16,19 +15,19 @@ header {
   border-bottom: 2px solid #eee;
 }
 
-h3.projects {
-  font-size: 20px;
-  font-weight: bold;
-  text-transform: uppercase;
-  color: #666;
+h3 {
+  font-size: 18px;
+  color: #333;
   margin: 20px 0 10px 0;
+  border-bottom: 2px solid #eee;
+  font-weight: 300;
 }
 
 div.content {
   max-width: 600px;
   line-height: 1.7em;
   margin: auto;
-  color: #555;
+  color: #333;
 }
 
 .column {
@@ -37,7 +36,7 @@ div.content {
   float: left;
 }
 
-a.external-link {
+a.link {
   border-bottom: 1px dashed #ccc;
   text-decoration: none;
   color: black;
@@ -45,10 +44,12 @@ a.external-link {
 
 p {
   margin-top: 15px;
+  color: #333;
 }
 
 img {
   width: 100%;
+  cursor: pointer;
   border-radius: 4px;
   mix-blend-mode: multiply;
 }
@@ -76,22 +77,15 @@ a.text img {
   text-align: center;
 }
 
-a:hover .img-wrap,
-a.text .img-wrap {
-  /*background-color: #555;*/
-}
-
 .promo-text {
   font-size: 0.9em;
   font-weight: bold;
-  /*margin: 0 auto 1em;*/
   color: #777;
-  padding: 5px 0;
   display: none;
   position: absolute;
-  /*top: 20%;*/
   line-height: 15px;
   text-transform: uppercase;
+  width: 99%;
 }
 
 .img-wrap.dark .promo-text {
@@ -104,15 +98,24 @@ a.text .promo-text {
   display: block;
 }
 
+/* Mobile styles */
+@media screen and (max-width: 650px) {
+  .column {
+    width: 33%;
+    display: inline-block;
+    float: left;
+  }
+}
+
 #work {
   /* Prevent vertical gaps */
   line-height: 0;
 
-  -webkit-column-count: 2;
+  -webkit-column-count: 4;
   -webkit-column-gap: 0px;
-  -moz-column-count: 2;
+  -moz-column-count: 4;
   -moz-column-gap: 0px;
-  column-count: 2;
+  column-count: 4;
   column-gap: 0px;
 }
 
@@ -121,10 +124,29 @@ a.text .promo-text {
   height: auto !important;
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (min-width: 650px) {
   #work {
-    -moz-column-count: 1;
-    -webkit-column-count: 1;
-    column-count: 1;
+    -moz-column-count: 4;
+    -webkit-column-count: 4;
+    column-count: 4;
   }
+}
+
+@media screen and (max-width: 649px) {
+  #work {
+    -moz-column-count: 3;
+    -webkit-column-count: 3;
+    column-count: 3;
+  }
+}
+
+.header {
+  display: inline-block;
+}
+
+header.title {
+  float: left;
+}
+header.links {
+  float: right;
 }
